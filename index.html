@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Signup form with validation and responsive design" />
+  <title>Signup Form | User Registration</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background">
+    <header>
+      <h1>Create Your Account</h1>
+      <p>Join our community in just a few steps.</p>
+    </header>
+
+    <main>
+      <form id="signupForm" class="form-glass" novalidate>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required aria-label="Email Address" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required aria-label="Password" />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" required aria-label="Confirm Password" />
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required aria-label="Date of Birth" />
+        </div>
+
+        <fieldset class="form-group">
+          <legend>Gender</legend>
+          <label><input type="radio" name="gender" value="male" required /> Male</label>
+          <label><input type="radio" name="gender" value="female" required /> Female</label>
+          <label><input type="radio" name="gender" value="other" required /> Other</label>
+        </fieldset>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" required />
+            I agree to the terms and conditions
+          </label>
+        </div>
+
+        <button type="submit">Sign Up</button>
+
+        <div id="feedback" class="hidden">Form submitted successfully!</div>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Signup Form Project. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("signupForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirm-password");
+    const feedback = document.getElementById("feedback");
+
+    function validateEmail(email) {
+      const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      return re.test(email);
+    }
+
+    function validatePassword(password) {
+      return /^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$/.test(password);
+    }
+
+    form.addEventListener("submit", (e) => {
+      let valid = true;
+      feedback.classList.add("hidden");
+
+      if (!validateEmail(emailInput.value)) {
+        emailInput.classList.add("invalid");
+        valid = false;
+        alert("Invalid email format.");
+      } else {
+        emailInput.classList.remove("invalid");
+      }
+
+      if (!validatePassword(passwordInput.value)) {
+        passwordInput.classList.add("invalid");
+        valid = false;
+        alert("Password must have 8+ chars, 1 uppercase, 1 number, and 1 special char.");
+      } else {
+        passwordInput.classList.remove("invalid");
+      }
+
+      if (passwordInput.value !== confirmInput.value) {
+        confirmInput.classList.add("invalid");
+        valid = false;
+        alert("Passwords do not match.");
+      } else {
+        confirmInput.classList.remove("invalid");
+      }
+
+      if (!valid) {
+        e.preventDefault();
+      } else {
+        e.preventDefault(); // remove if you integrate backend
+        feedback.classList.remove("hidden");
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
