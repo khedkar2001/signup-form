@@ -18,5 +18,5 @@ A modern and responsive signup form built using **HTML5** and **CSS3** with real
 
 ## 🌐 Live Demo
 
-🔗 [View Live Site](https://beagle-fact.netlify.app/)
+🔗 [View Live Site](https://sign-upfrom.netlify.app/)
 
